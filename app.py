@@ -1,7 +1,12 @@
+import datetime
 import sys
 
 from Credit_calculator import Ui_MainWindow
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+from dateutil.parser import parse
 from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox
+
 
 
 class Calculator_app(QMainWindow, Ui_MainWindow):
@@ -69,7 +74,7 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.month_rate = self.rate / 1200
         self.month_payment_annuty = self.sum*((self.month_rate * (1 + self.month_rate)**(self.term*self.type_term)) /
                                               ((1 + self.month_rate)**(self.term*self.type_term)  - 1))
-        self.all_payments_annuty = self.month_payment_annuty * 12 * self.term
+        self.all_payments_annuty = self.month_payment_annuty * self.type_term * self.term
         self.annuty_overpayment = self.all_payments_annuty - self.sum
 
         self.amount_payments.setText(f'Сумма выплат: {self.all_payments_annuty:.2f} руб.')
@@ -83,15 +88,26 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         поэтому он показывается только в разделе "График платежей"
         '''
         self.type_term = 1 if self.choice_term.currentText() == 'мес.' else 12
+        self.start_date = datetime(self.date.year(), self.date.month(), self.date.day())
+        if self.type_term == 12:
+            self.end_date = parse(self.start_date + relativedelta(years=self.term))
+        else:
+            self.end_date = parse(self.start_date + relativedelta(months=self.term))
+
+        print(self.end_date)
+
+        self.count_days = (self.end_date - self.start_date).days
+        print(self.count_days)
+
         # Часть основного долга, одинаковая для каждого месяца (платежа)
         self.part_of_debt = self.sum / (self.term*self.type_term)
         # Сумма процентов по дифференцированному платежу
-        self.percents_diff = (self.term * (self.term + 1) * (self.rate/100))/2 *self.sum
+        self.percents_diff = ((self.sum*(self.rate/100)*self.count_days)/365)*365
         # Сумма общего долга
         self.all_payments_diff = self.sum + self.percents_diff
 
-        self.amount_payments.setText(f"Ежемесячный платеж по\nосновному долгу: {self.part_of_debt:.2f} руб.")
-        self.month_payment.setText(f"Для получения более подробной\nинформации о платежах по\nдифференцированному кредиту,\nобратитесь к графику платежей.")
+        self.amount_payments.setText(f"Платеж без учета процентов: {self.part_of_debt:.2f} руб.")
+        self.month_payment.setText(f"Сумма переплаты: {self.percents_diff}")
         self.overpayment.setText(f"")
 
 
