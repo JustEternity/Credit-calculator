@@ -12,14 +12,14 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(960, 571)
+        MainWindow.resize(960, 570)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(960, 571))
-        MainWindow.setMaximumSize(960, 571)
+        MainWindow.setMinimumSize(QtCore.QSize(960, 570))
+        MainWindow.setMaximumSize(960, 570)
         MainWindow.setMouseTracking(False)
         MainWindow.setFocusPolicy(QtCore.Qt.FocusPolicy.WheelFocus)
         icon = QtGui.QIcon.fromTheme("accessories-calculator")
@@ -441,7 +441,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Кредитный калькулятор"))
         self.calculation_button.setText(_translate("MainWindow", "Рассчитать"))
         self.info_button.setText(_translate("MainWindow", "?"))
         self.label_sum.setText(_translate("MainWindow", "Сумма кредита"))

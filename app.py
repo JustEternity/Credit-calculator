@@ -4,8 +4,9 @@ import sys
 from Credit_calculator import Ui_MainWindow
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from dateutil.parser import parse
 from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox
+from PyQt6.QtCore import QDate
+
 
 
 
@@ -80,6 +81,28 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.amount_payments.setText(f'Сумма выплат: {self.all_payments_annuty:.2f} руб.')
         self.month_payment.setText(f"Ежемесячный платеж: {self.month_payment_annuty:.2f} руб.")
         self.overpayment.setText(f"Сумма переплаты: {self.annuty_overpayment:.2f} руб.")
+        print(self.calculate_annuity_payments(self.sum, self.month_payment_annuty, self.rate/100, self.term*self.type_term, self.date.toString('yyyy-MM-dd')))
+
+
+
+
+
+    def calculate_annuity_payments(self, loan_amount, monthly_payment, interest_rate, loan_term, issue_date):
+        payment_schedule = {}
+        remaining_loan = loan_amount
+        issue_date = datetime.strptime(issue_date, "%Y-%m-%d")
+
+        for month in range(1, loan_term + 1):
+            payment_date = issue_date + relativedelta(months=+month)
+            if payment_date.day < issue_date.day:
+                payment_date = payment_date + relativedelta(day=31)
+            interest_payment = remaining_loan * (interest_rate / 12)
+            principal_payment = monthly_payment - interest_payment
+            remaining_loan -= principal_payment
+            payment_schedule[payment_date.strftime("%Y-%m-%d")] = [monthly_payment, interest_payment, remaining_loan]
+
+        return payment_schedule
+
 
 
 
@@ -90,14 +113,11 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.type_term = 1 if self.choice_term.currentText() == 'мес.' else 12
         self.start_date = datetime(self.date.year(), self.date.month(), self.date.day())
         if self.type_term == 12:
-            self.end_date = parse(self.start_date + relativedelta(years=self.term))
+            self.end_date = self.start_date + relativedelta(years=self.term)
         else:
-            self.end_date = parse(self.start_date + relativedelta(months=self.term))
-
-        print(self.end_date)
+            self.end_date = self.start_date + relativedelta(months=self.term)
 
         self.count_days = (self.end_date - self.start_date).days
-        print(self.count_days)
 
         # Часть основного долга, одинаковая для каждого месяца (платежа)
         self.part_of_debt = self.sum / (self.term*self.type_term)
@@ -109,6 +129,35 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.amount_payments.setText(f"Платеж без учета процентов: {self.part_of_debt:.2f} руб.")
         self.month_payment.setText(f"Сумма переплаты: {self.percents_diff}")
         self.overpayment.setText(f"")
+
+        print(self.schedule_diff(self.sum, self.rate, self.term*self.type_term, self.date))
+
+
+    def schedule_diff(self, loan_amount, interest_rate, term, issue_date):
+        payments = {}
+        monthly_interest_rate = interest_rate / 12 / 100
+        monthly_payment = loan_amount / term
+        remaining_balance = loan_amount
+
+        # Преобразование QDate в datetime
+        issue_date = datetime(issue_date.year(), issue_date.month(), issue_date.day())
+
+        for month in range(1, term + 1):
+            interest_payment = remaining_balance * monthly_interest_rate
+            principal_payment = monthly_payment - interest_payment
+            remaining_balance -= principal_payment
+
+            # Adjust the payment date if necessary
+            payment_date = (issue_date + relativedelta(months=+month)).date()
+            if payment_date.day != issue_date.day:
+                payment_date = payment_date.replace(day=min(issue_date.day, payment_date.day))
+
+            # Store the payment details in the dictionary
+            payments[payment_date] = [monthly_payment, interest_payment, principal_payment]
+
+        return payments
+
+
 
 
     def calculate_paygraph(self):
