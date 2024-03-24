@@ -2,6 +2,7 @@ import datetime
 import sys
 
 from Credit_calculator import Ui_MainWindow
+from info_window import Ui_Form
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox
@@ -153,7 +154,7 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                 payment_date = payment_date.replace(day=min(issue_date.day, payment_date.day))
 
             # Store the payment details in the dictionary
-            payments[payment_date] = [monthly_payment, interest_payment, principal_payment]
+            payments[payment_date.strftime("%Y-%m-%d")] = [monthly_payment, interest_payment, principal_payment]
 
         return payments
 
@@ -172,20 +173,17 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         '''
         self.info_widget = Info_window()
         self.info_widget.show()
-        pass
 
 
-class Info_window(QMainWindow):
+class Info_window(QMainWindow, Ui_Form):
     def __init__(self) -> None:
         super().__init__()
+        self.setupUi(self)
 
-
-
-
-class Graph_window(QMainWindow):
+class Graph_window(QMainWindow, ):
     def __init__(self) -> None:
         super().__init__()
-
+        self.setupUi(self)
 
 def main():
     app = QApplication(sys.argv)
