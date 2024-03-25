@@ -7,6 +7,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox
 from PyQt6.QtCore import QDate
+from payment_schedule import Ui_Schedule
 
 
 
@@ -166,7 +167,6 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         '''
         self.graph_widget = Graph_window()
         self.graph_widget.show()
-        pass
 
     def show_info(self):
         ''' Функция для вывода справочной информации по кредитованию
@@ -180,7 +180,7 @@ class Info_window(QMainWindow, Ui_Form):
         super().__init__()
         self.setupUi(self)
 
-class Graph_window(QMainWindow, ):
+class Graph_window(QMainWindow, Ui_Schedule):
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
