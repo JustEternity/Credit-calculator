@@ -74,7 +74,7 @@ class Ui_Schedule(object):
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 439, 429))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.tableWidget = QtWidgets.QTableWidget(parent=self.scrollAreaWidgetContents)
-        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 441, 431))
+        self.tableWidget.setGeometry(QtCore.QRect(0, 0, self.scrollArea.width(), self.scrollArea.height()))
         self.tableWidget.setStyleSheet("#tableWidget {\n"
 "background-color: #cfffd7;\n"
 "}\n"
@@ -84,6 +84,7 @@ class Ui_Schedule(object):
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setRowCount(0)
         self.tableWidget.horizontalHeader().setVisible(False)
+        self.tableWidget.verticalHeader().setVisible(False)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.retranslateUi(Form)
@@ -91,7 +92,7 @@ class Ui_Schedule(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Кредитный кальулятор"))
         self.label.setText(_translate("Form", "График платежей"))
         self.label_2.setText(_translate("Form", "Дата"))
         self.label_3.setText(_translate("Form", "Сумма\n"
@@ -101,11 +102,4 @@ class Ui_Schedule(object):
 "долга"))
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec())
+

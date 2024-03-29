@@ -2,11 +2,10 @@ import datetime
 import sys
 
 from Credit_calculator import Ui_MainWindow
-from info_window import Ui_Form
+from info_window import Ui_Info
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox
-from PyQt6.QtCore import QDate
+from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox, QTableWidgetItem
 from payment_schedule import Ui_Schedule
 
 
@@ -33,7 +32,7 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
 
         self.calculation_button.clicked.connect(self.calc_button_click)
         self.info_button.clicked.connect(self.show_info)
-        self.paygraph_button.clicked.connect(self.calculate_paygraph)
+        self.paygraph_button.clicked.connect(self.draw_schedule)
 
 
     def calc_button_click(self):
@@ -43,7 +42,7 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
             case 2:
                 self.calculate_diff()
             case -1:
-                QMessageBox.warning(self.layoutWidget, "Предупреждение", "Выберите тип кредита")
+                QMessageBox.warning(self.layoutWidget, "Предупреждение", "Выберите тип платежа по кредиту")
 
 
 
@@ -51,7 +50,7 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         try:
             self.sum = int(text)
         except ValueError:
-            QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
+            QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть целое число")
 
     def change_rate(self, text):
         try:
@@ -83,7 +82,9 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.amount_payments.setText(f'Сумма выплат: {self.all_payments_annuty:.2f} руб.')
         self.month_payment.setText(f"Ежемесячный платеж: {self.month_payment_annuty:.2f} руб.")
         self.overpayment.setText(f"Сумма переплаты: {self.annuty_overpayment:.2f} руб.")
-        print(self.calculate_annuity_payments(self.sum, self.month_payment_annuty, self.rate/100, self.term*self.type_term, self.date.toString('yyyy-MM-dd')))
+        self.schedule_ann = self.calculate_annuity_payments(self.sum, self.month_payment_annuty, self.rate/100,
+                                              self.term*self.type_term, self.date.toString('yyyy-MM-dd'))
+
 
 
 
@@ -101,7 +102,9 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
             interest_payment = remaining_loan * (interest_rate / 12)
             principal_payment = monthly_payment - interest_payment
             remaining_loan -= principal_payment
-            payment_schedule[payment_date.strftime("%Y-%m-%d")] = [monthly_payment, interest_payment, remaining_loan]
+            payment_schedule[payment_date.strftime("%Y-%m-%d")] = [round(monthly_payment, 2),
+                                                                   round(interest_payment, 2),
+                                                                   round(remaining_loan, 2)]
 
         return payment_schedule
 
@@ -132,13 +135,13 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.month_payment.setText(f"Сумма переплаты: {self.percents_diff}")
         self.overpayment.setText(f"")
 
-        print(self.schedule_diff(self.sum, self.rate, self.term*self.type_term, self.date))
+        self.schedule_differ = self.schedule_diff(self.sum, self.rate, self.term*self.type_term, self.date)
+
 
 
     def schedule_diff(self, loan_amount, interest_rate, term, issue_date):
         payments = {}
         monthly_interest_rate = interest_rate / 12 / 100
-        monthly_payment = loan_amount / term
         remaining_balance = loan_amount
 
         # Преобразование QDate в datetime
@@ -146,7 +149,8 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
 
         for month in range(1, term + 1):
             interest_payment = remaining_balance * monthly_interest_rate
-            principal_payment = monthly_payment - interest_payment
+            principal_payment = loan_amount / term
+            total_payment = principal_payment + interest_payment
             remaining_balance -= principal_payment
 
             # Adjust the payment date if necessary
@@ -155,18 +159,31 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                 payment_date = payment_date.replace(day=min(issue_date.day, payment_date.day))
 
             # Store the payment details in the dictionary
-            payments[payment_date.strftime("%Y-%m-%d")] = [monthly_payment, interest_payment, principal_payment]
+            payments[payment_date.strftime("%Y-%m-%d")] = [round(total_payment, 2),
+                                                        round(interest_payment, 2),
+                                                        round(remaining_balance, 2)]
 
         return payments
 
 
+    def draw_schedule(self):
+        match self.radioButton_group.checkedId():
+            case 1:
+                self.calculate_paygraph(self.schedule_ann)
+            case 2:
+                self.calculate_paygraph(self.schedule_differ)
+            case -1:
+                QMessageBox.warning(self.layoutWidget, "Предупреждение", "Выберите тип платежа по кредиту")
 
 
-    def calculate_paygraph(self):
-        ''' Функция для расчета и вывода графика платежей по кредиту
+
+    def calculate_paygraph(self, schedule):
+        ''' Функция для вывода графика платежей по кредиту
         '''
         self.graph_widget = Graph_window()
         self.graph_widget.show()
+        self.graph_widget.display_schedule(schedule)
+
 
     def show_info(self):
         ''' Функция для вывода справочной информации по кредитованию
@@ -175,15 +192,32 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.info_widget.show()
 
 
-class Info_window(QMainWindow, Ui_Form):
+
+class Info_window(QMainWindow, Ui_Info):
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
+
+
 
 class Graph_window(QMainWindow, Ui_Schedule):
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
+
+    def display_schedule(self, data_dict):
+        try:
+            self.tableWidget.setRowCount(len(data_dict))
+            row = 0
+            for key, values in data_dict.items():
+                self.tableWidget.setItem(row, 0, QTableWidgetItem(key))  # Установка ключа в первый столбец
+                for col, value in enumerate(values):
+                    self.tableWidget.setItem(row, col + 1, QTableWidgetItem(str(value)))  # Установка значения в следующие столбцы
+                row += 1
+        except ValueError:
+            QMessageBox.warning(self.layout, 'Warning', 'Enter data to procceding')
+
+
 
 def main():
     app = QApplication(sys.argv)
