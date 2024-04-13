@@ -7,6 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import QHeaderView
 
 
 class Ui_Schedule(object):
@@ -80,12 +81,17 @@ class Ui_Schedule(object):
 "}\n"
 "")
         self.tableWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        self.tableWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.tableWidget.setColumnCount(4)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setRowCount(0)
         self.tableWidget.horizontalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setVisible(False)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.tableWidget.setColumnWidth(0, 120)
+        self.tableWidget.setColumnWidth(2, 105)
+        self.tableWidget.setColumnWidth(3, 96)
+
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

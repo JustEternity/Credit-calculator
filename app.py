@@ -7,7 +7,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox, QTableWidgetItem
 from payment_schedule import Ui_Schedule
-
+from PyQt6.QtCore import Qt
 
 
 
@@ -36,14 +36,16 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
 
 
     def calc_button_click(self):
-        match self.radioButton_group.checkedId():
-            case 1:
-                self.calculate_annuty()
-            case 2:
-                self.calculate_diff()
-            case -1:
-                QMessageBox.warning(self.layoutWidget, "Предупреждение", "Выберите тип платежа по кредиту")
-
+        if self.sum and self.date and self.rate and self.term:
+            match self.radioButton_group.checkedId():
+                case 1:
+                    self.calculate_annuty()
+                case 2:
+                    self.calculate_diff()
+                case -1:
+                    QMessageBox.warning(self.layoutWidget, "Предупреждение", "Выберите тип платежа по кредиту")
+        else:
+            QMessageBox.warning(self.layoutWidget, "Предупреждение", "Заполните поля выше")
 
 
     def change_sum(self, text):
@@ -167,13 +169,16 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
 
 
     def draw_schedule(self):
-        match self.radioButton_group.checkedId():
-            case 1:
-                self.calculate_paygraph(self.schedule_ann)
-            case 2:
-                self.calculate_paygraph(self.schedule_differ)
-            case -1:
-                QMessageBox.warning(self.layoutWidget, "Предупреждение", "Выберите тип платежа по кредиту")
+        if self.sum and self.date and self.rate and self.term:
+            match self.radioButton_group.checkedId():
+                case 1:
+                    self.calculate_paygraph(self.schedule_ann)
+                case 2:
+                    self.calculate_paygraph(self.schedule_differ)
+                case -1:
+                    QMessageBox.warning(self.layoutWidget, "Предупреждение", "Выберите тип платежа по кредиту")
+        else:
+            QMessageBox.warning(self.layoutWidget, "Предупреждение", "Заполните поля выше")
 
 
 
@@ -210,9 +215,13 @@ class Graph_window(QMainWindow, Ui_Schedule):
             self.tableWidget.setRowCount(len(data_dict))
             row = 0
             for key, values in data_dict.items():
-                self.tableWidget.setItem(row, 0, QTableWidgetItem(key))  # Установка ключа в первый столбец
+                date = QTableWidgetItem(key)
+                date.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                self.tableWidget.setItem(row, 0, date)  # Установка ключа в первый столбец
                 for col, value in enumerate(values):
-                    self.tableWidget.setItem(row, col + 1, QTableWidgetItem(str(value)))  # Установка значения в следующие столбцы
+                    item = QTableWidgetItem(str(value))
+                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                    self.tableWidget.setItem(row, col + 1, item)  # Установка значений в следующие столбцы
                 row += 1
         except ValueError:
             QMessageBox.warning(self.layout, 'Warning', 'Enter data to procceding')
