@@ -32,7 +32,13 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
 
         self.calculation_button.clicked.connect(self.calc_button_click)
         self.info_button.clicked.connect(self.show_info)
-        self.paygraph_button.clicked.connect(self.draw_schedule)
+        self.paygraph_button.clicked.connect(self.calc_schedule_and_res)
+
+
+
+    def calc_schedule_and_res(self):
+        self.calc_button_click()
+        self.draw_schedule()
 
 
     def calc_button_click(self):
@@ -128,17 +134,18 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
 
         # Часть основного долга, одинаковая для каждого месяца (платежа)
         self.part_of_debt = self.sum / (self.term*self.type_term)
-        # Сумма процентов по дифференцированному платежу
-        self.percents_diff = ((self.sum*(self.rate/100)*self.count_days)/365)*365
-        # Сумма общего долга
-        self.all_payments_diff = self.sum + self.percents_diff
 
-        self.amount_payments.setText(f"Платеж без учета процентов: {self.part_of_debt:.2f} руб.")
-        self.month_payment.setText(f"Сумма переплаты: {self.percents_diff}")
-        self.overpayment.setText(f"")
+
+        self.amount_payments.setText(f"Сумма платежа\nбез учета процентов: {self.part_of_debt:.2f} руб.")
 
         self.schedule_differ = self.schedule_diff(self.sum, self.rate, self.term*self.type_term, self.date)
+        self.sum_of_percents = self.percents_sum(self.schedule_differ)
+        self.month_payment.setText(f"Переплата: {self.sum_of_percents} руб.")
+        self.overpayment.setText(f"")
 
+
+    def percents_sum(self, schedule):
+        return sum(value[1] for value in schedule.values())
 
 
     def schedule_diff(self, loan_amount, interest_rate, term, issue_date):

@@ -86,7 +86,7 @@ class Ui_MainWindow(object):
 
         self.credit_sum = QtWidgets.QGroupBox(parent=self.layoutWidget)
         self.credit_sum.setMinimumSize(QtCore.QSize(192, 100))
-        self.credit_sum.setMaximumSize(QtCore.QSize(192, 16777215))
+        self.credit_sum.setMaximumSize(QtCore.QSize(192, 100))
         self.credit_sum.setStyleSheet("#credit_sum {\n"
                                         "background-color: #fcc288;\n"
                                         "border-radius: 50%;\n"
@@ -456,5 +456,5 @@ class Ui_MainWindow(object):
         self.overpayment.setText(_translate("MainWindow", "Сумма переплаты:"))
         self.paygraph_button.setText(_translate("MainWindow", "График платежей"))
         self.label_credit_type.setText(_translate("MainWindow", "Вид платежа:"))
-        self.radioButton_1.setText(_translate("MainWindow", "Аннуитентный"))
+        self.radioButton_1.setText(_translate("MainWindow", "Аннуитетный"))
         self.radioButton_2.setText(_translate("MainWindow", "Дифференцированный"))
