@@ -102,6 +102,7 @@ class Ui_MainWindow(object):
 
         self.enter_sum = QtWidgets.QLineEdit(parent=self.credit_sum)
         self.enter_sum.setMaximumSize(QtCore.QSize(150, 25))
+        self.enter_sum.setMaxLength(10)
         font = QtGui.QFont()
         font.setPointSize(11)
         self.enter_sum.setFont(font)
@@ -221,6 +222,7 @@ class Ui_MainWindow(object):
 
         self.rate_enter = QtWidgets.QLineEdit(parent=self.rate)
         self.rate_enter.setMaximumSize(QtCore.QSize(100, 25))
+        self.rate_enter.setMaxLength(8)
         font = QtGui.QFont()
         font.setPointSize(11)
         self.rate_enter.setFont(font)
@@ -283,6 +285,7 @@ class Ui_MainWindow(object):
 
         self.enter_term = QtWidgets.QLineEdit(parent=self.term)
         self.enter_term.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.enter_term.setMaxLength(3)
         font = QtGui.QFont()
         font.setPointSize(11)
         self.enter_term.setFont(font)
@@ -316,8 +319,21 @@ class Ui_MainWindow(object):
 
         self.data_input.addWidget(self.term)
 
+        self.income = QtWidgets.QLabel(parent=self.centralwidget)
+        self.income.setGeometry(QtCore.QRect(430, 300, 447, 80))
+        self.income.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.income.setFont(font)
+        self.income.setObjectName('income')
+        self.income.setStyleSheet("#income {\n"
+                                "border-radius: 30%;\n"
+                                "background: #ebfabe;\n"
+                                "}")
+
+
         self.user_res = QtWidgets.QGroupBox(parent=self.groupBox)
-        self.user_res.setGeometry(QtCore.QRect(60, 280, 311, 181))
+        self.user_res.setGeometry(QtCore.QRect(60, 280, 340, 181))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.user_res.setFont(font)
@@ -356,7 +372,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.overpayment)
 
         self.paygraph_button = QtWidgets.QPushButton(parent=self.groupBox)
-        self.paygraph_button.setGeometry(QtCore.QRect(400, 410, 221, 51))
+        self.paygraph_button.setGeometry(QtCore.QRect(410, 410, 221, 51))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.paygraph_button.setFont(font)
@@ -458,3 +474,4 @@ class Ui_MainWindow(object):
         self.label_credit_type.setText(_translate("MainWindow", "Вид платежа:"))
         self.radioButton_1.setText(_translate("MainWindow", "Аннуитетный"))
         self.radioButton_2.setText(_translate("MainWindow", "Дифференцированный"))
+        self.income.setText(_translate('MainWindow', 'Необходимый уровень дохода для одобрения кредита:\n'))

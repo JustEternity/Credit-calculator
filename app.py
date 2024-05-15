@@ -1,11 +1,14 @@
 import datetime
 import sys
+import openpyxl
+import gmpy2
+
 
 from Credit_calculator import Ui_MainWindow
 from info_window import Ui_Info
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox, QTableWidgetItem
+from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox, QTableWidgetItem, QFileDialog
 from payment_schedule import Ui_Schedule
 from PyQt6.QtCore import Qt
 
@@ -35,11 +38,9 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.paygraph_button.clicked.connect(self.calc_schedule_and_res)
 
 
-
     def calc_schedule_and_res(self):
         self.calc_button_click()
         self.draw_schedule()
-
 
     def calc_button_click(self):
         if self.sum and self.date and self.rate and self.term:
@@ -53,29 +54,26 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         else:
             QMessageBox.warning(self.layoutWidget, "Предупреждение", "Заполните поля выше")
 
-
     def change_sum(self, text):
         try:
-            self.sum = int(text)
+            self.sum = gmpy2.mpz(text)
         except ValueError:
             QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть целое число")
 
     def change_rate(self, text):
         try:
-            self.rate = float(text)
+            self.rate = gmpy2.mpfr(text)
         except ValueError:
             QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
 
     def change_term(self, text):
         try:
-            self.term = int(text)
+            self.term = gmpy2.mpz(text)
         except ValueError:
             QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
 
     def change_date(self, text):
         self.date = text
-
-
 
     def calculate_annuty(self):
         ''' Функция, рассчитывающая ежемесячный платеж, общую сумму кредита и сумму процентов для аннуитентного кредита
@@ -92,11 +90,6 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.overpayment.setText(f"Сумма переплаты: {self.annuty_overpayment:.2f} руб.")
         self.schedule_ann = self.calculate_annuity_payments(self.sum, self.month_payment_annuty, self.rate/100,
                                               self.term*self.type_term, self.date.toString('yyyy-MM-dd'))
-
-
-
-
-
 
     def calculate_annuity_payments(self, loan_amount, monthly_payment, interest_rate, loan_term, issue_date):
         payment_schedule = {}
@@ -115,9 +108,6 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                                                                    round(remaining_loan, 2)]
 
         return payment_schedule
-
-
-
 
     def calculate_diff(self):
         ''' Функция для расчета суммы основного долга для каждого платежа, ежемесячный платеж уменьшается со временем,
@@ -143,10 +133,8 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.month_payment.setText(f"Переплата: {self.sum_of_percents} руб.")
         self.overpayment.setText(f"")
 
-
     def percents_sum(self, schedule):
         return sum(value[1] for value in schedule.values())
-
 
     def schedule_diff(self, loan_amount, interest_rate, term, issue_date):
         payments = {}
@@ -174,7 +162,6 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
 
         return payments
 
-
     def draw_schedule(self):
         if self.sum and self.date and self.rate and self.term:
             match self.radioButton_group.checkedId():
@@ -187,15 +174,12 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         else:
             QMessageBox.warning(self.layoutWidget, "Предупреждение", "Заполните поля выше")
 
-
-
     def calculate_paygraph(self, schedule):
         ''' Функция для вывода графика платежей по кредиту
         '''
         self.graph_widget = Graph_window()
         self.graph_widget.show()
         self.graph_widget.display_schedule(schedule)
-
 
     def show_info(self):
         ''' Функция для вывода справочной информации по кредитованию
@@ -216,6 +200,7 @@ class Graph_window(QMainWindow, Ui_Schedule):
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
+        self.save_button.clicked.connect(self.save_xls)
 
     def display_schedule(self, data_dict):
         try:
@@ -233,6 +218,30 @@ class Graph_window(QMainWindow, Ui_Schedule):
         except ValueError:
             QMessageBox.warning(self.layout, 'Warning', 'Enter data to procceding')
 
+    def save_xls(self):
+        file_name, _ = QFileDialog.getSaveFileName(self, "Save File", "", "Excel Files (*.xlsx)")
+        if file_name:
+            wb = openpyxl.Workbook()
+            ws = wb.active
+
+            # Вставить 1 строку перед экспортируемой таблицей
+            ws.insert_rows(1, 1)
+
+            # Записать слова в ячейки
+            ws.cell(row=1, column=1).value = "Дата"
+            ws.cell(row=1, column=2).value = "Сумма платежа"
+            ws.cell(row=1, column=3).value = "Проценты"
+            ws.cell(row=1, column=4).value = "Остаток"
+
+            # Записать данные таблицы
+            for row in range(self.tableWidget.rowCount()):
+                for column in range(self.tableWidget.columnCount()):
+                    item = self.tableWidget.item(row, column)
+                    if item is not None:
+                        ws.cell(row=row+2, column=column+1, value=item.text())
+
+            # Сохранить файл
+            wb.save(file_name)
 
 
 def main():
