@@ -1,7 +1,7 @@
 import datetime
 import sys
 import openpyxl
-import gmpy2
+
 
 
 from Credit_calculator import Ui_MainWindow
@@ -11,6 +11,7 @@ from dateutil.relativedelta import relativedelta
 from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox, QTableWidgetItem, QFileDialog
 from payment_schedule import Ui_Schedule
 from PyQt6.QtCore import Qt
+
 
 
 
@@ -56,19 +57,31 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
 
     def change_sum(self, text):
         try:
-            self.sum = gmpy2.mpz(text)
+            self.sum = int(text)
+            if self.sum > 100000000:
+                self.sum = 100000000
+                self.enter_sum.setText('100000000')
         except ValueError:
             QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть целое число")
 
     def change_rate(self, text):
         try:
-            self.rate = gmpy2.mpfr(text)
+            self.rate = float(text)
+            if self.rate > 292:
+                self.rate = 292
+                self.rate_enter.setText('292')
         except ValueError:
             QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
 
     def change_term(self, text):
         try:
-            self.term = gmpy2.mpz(text)
+            self.term = int(text)
+            if self.choice_term.currentText() == 'мес.' and self.term > 360:
+                self.term = 360
+                self.enter_term.setText('360')
+            if self.choice_term.currentText() == 'лет' and self.term > 30:
+                self.term = 30
+                self.enter_term.setText('30')
         except ValueError:
             QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
 
@@ -107,6 +120,10 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                                                                    round(interest_payment, 2),
                                                                    round(remaining_loan, 2)]
 
+        print(self.sum, self.rate, self.term)
+
+        self.income.setText(f'Необходимый уровень дохода для одобрения кредита:\n{monthly_payment*2:.0f} руб.')
+
         return payment_schedule
 
     def calculate_diff(self):
@@ -130,7 +147,7 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
 
         self.schedule_differ = self.schedule_diff(self.sum, self.rate, self.term*self.type_term, self.date)
         self.sum_of_percents = self.percents_sum(self.schedule_differ)
-        self.month_payment.setText(f"Переплата: {self.sum_of_percents} руб.")
+        self.month_payment.setText(f"Переплата: {self.sum_of_percents:.2f} руб.")
         self.overpayment.setText(f"")
 
     def percents_sum(self, schedule):
@@ -159,6 +176,8 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
             payments[payment_date.strftime("%Y-%m-%d")] = [round(total_payment, 2),
                                                         round(interest_payment, 2),
                                                         round(remaining_balance, 2)]
+
+        self.income = f'Необходимый уровень дохода для одобрения кредита:\n'
 
         return payments
 

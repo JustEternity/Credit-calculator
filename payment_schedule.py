@@ -13,6 +13,7 @@ class Ui_Schedule(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(480, 570)
+        Form.setFixedSize(480, 570)
         Form.setStyleSheet("#Form {\n"
 "background-color: #ebfabe;\n"
 "}")
