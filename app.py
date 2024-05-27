@@ -98,9 +98,9 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.all_payments_annuty = self.month_payment_annuty * self.type_term * self.term
         self.annuty_overpayment = self.all_payments_annuty - self.sum
 
-        self.amount_payments.setText(f'Сумма выплат: {self.all_payments_annuty:.2f} руб.')
-        self.month_payment.setText(f"Ежемесячный платеж: {self.month_payment_annuty:.2f} руб.")
-        self.overpayment.setText(f"Сумма переплаты: {self.annuty_overpayment:.2f} руб.")
+        self.amount_payments.setText(f'Сумма выплат: {self.all_payments_annuty:.2f}')
+        self.month_payment.setText(f"Ежемесячный платеж: {self.month_payment_annuty:.2f}")
+        self.overpayment.setText(f"Сумма переплаты: {self.annuty_overpayment:.2f}")
         self.schedule_ann = self.calculate_annuity_payments(self.sum, self.month_payment_annuty, self.rate/100,
                                               self.term*self.type_term, self.date.toString('yyyy-MM-dd'))
 
@@ -116,13 +116,11 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
             interest_payment = remaining_loan * (interest_rate / 12)
             principal_payment = monthly_payment - interest_payment
             remaining_loan -= principal_payment
-            payment_schedule[payment_date.strftime("%Y-%m-%d")] = [round(monthly_payment, 2),
-                                                                   round(interest_payment, 2),
-                                                                   round(remaining_loan, 2)]
+            payment_schedule[payment_date.strftime("%Y-%m-%d")] = [f'{round(monthly_payment, 2)}',
+                                                                   f'{round(interest_payment, 2)}',
+                                                                   f'{round(remaining_loan, 2)}']
 
-        print(self.sum, self.rate, self.term)
-
-        self.income.setText(f'Необходимый уровень дохода для одобрения кредита:\n{monthly_payment*2:.0f} руб.')
+        self.income.setText(f'Необходимый уровень дохода для одобрения кредита:\n{monthly_payment*2:.0f}')
 
         return payment_schedule
 
@@ -143,15 +141,15 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.part_of_debt = self.sum / (self.term*self.type_term)
 
 
-        self.amount_payments.setText(f"Сумма платежа\nбез учета процентов: {self.part_of_debt:.2f} руб.")
+        self.amount_payments.setText(f"Сумма платежа\nбез учета процентов: {self.part_of_debt:.2f}")
 
         self.schedule_differ = self.schedule_diff(self.sum, self.rate, self.term*self.type_term, self.date)
         self.sum_of_percents = self.percents_sum(self.schedule_differ)
-        self.month_payment.setText(f"Переплата: {self.sum_of_percents:.2f} руб.")
+        self.month_payment.setText(f"Переплата: {self.sum_of_percents:.2f}")
         self.overpayment.setText(f"")
 
     def percents_sum(self, schedule):
-        return sum(value[1] for value in schedule.values())
+        return sum(float(value[1]) for value in schedule.values())
 
     def schedule_diff(self, loan_amount, interest_rate, term, issue_date):
         payments = {}
@@ -173,11 +171,11 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                 payment_date = payment_date.replace(day=min(issue_date.day, payment_date.day))
 
             # Store the payment details in the dictionary
-            payments[payment_date.strftime("%Y-%m-%d")] = [round(total_payment, 2),
-                                                        round(interest_payment, 2),
-                                                        round(remaining_balance, 2)]
+            payments[payment_date.strftime("%Y-%m-%d")] = [f'{round(total_payment, 2)}',
+                                                           f'{round(interest_payment, 2)}',
+                                                           f'{round(remaining_balance, 2)}']
 
-        self.income = f'Необходимый уровень дохода для одобрения кредита:\n'
+        self.income.setText(f'Необходимый уровень дохода для одобрения кредита:\n {float(next(iter(payments.values()))[0])*2:.0f}')
 
         return payments
 

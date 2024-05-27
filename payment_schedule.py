@@ -86,9 +86,9 @@ class Ui_Schedule(object):
         self.tableWidget.horizontalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setVisible(False)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-        self.tableWidget.setColumnWidth(0, 120)
-        self.tableWidget.setColumnWidth(2, 105)
-        self.tableWidget.setColumnWidth(3, 96)
+        self.tableWidget.setColumnWidth(0, 115)
+        self.tableWidget.setColumnWidth(2, 108)
+        self.tableWidget.setColumnWidth(3, 98)
 
 
         self.save_button = QtWidgets.QPushButton(parent=Form)
