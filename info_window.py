@@ -52,109 +52,294 @@ class Ui_Info(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Кредитный калькулятор"))
-        self.textBrowser.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Кредит — это финансовые обязательства двух сторон, одна из которых предоставляет наличные или другие ресурсы, а вторая обещает вернуть их согласно принципам срочности, платности и возвратности. Кредит может быть беспроцентным, в этом случае он будет называться рассрочкой. Такие ссуды предоставляют магазины, государство (например, в качестве меры поддержки малого бизнеса), иногда застройщики.Кредитование, с точки зрения клиента банка, — получение денег в долг на индивидуальных условиях, зафиксированных в договоре. В нём указываются процентная ставка и срок в месяцах, фиксируются дата и сумма ежемесячного платежа, а также возможность досрочного погашения. Заёмщик возвращает ссуду постепенно, уменьшая сумму долга перед кредитором.Многие предвзято относятся к банковским займам, предпочитая копить. Однако такая позиция не всегда единственно верная. Кредит может быть действительно выгодным финансовым инструментом. Часто оказывается, что приобрести нужные вещи или услуги прямо сейчас дешевле. Например, пока вы откладываете с зарплаты на покупку, инфляция «съедает» часть накоплений, дорожает и сам товар.По способу погашения выделяют аннуитетные и дифференцированные ссуды. Переплата банку будет одинаковая и в том и в другом случае, если погашать долг по графику платежей.Аннуитетные платежи всегда одинаковые. Благодаря этому удобно планировать свой бюджет. Взносы состоят из неравномерно распределённой задолженности, а также суммы переплаты. Сначала погашаются преимущественно проценты, затем — основной долг.Дифференцированная система погашения отличается тем, что размер ежемесячных взносов изначально больше, а затем уменьшается. Это связано с тем, что сумма основного долга равномерно распределена на весь период кредитования, а к ней прибавляются проценты, размер которых постепенно уменьшается.При определении порогов процентной ставки кредитования банки ориентируются на установленную ЦБ ключевую ставку. Регулятор проводит мониторинг условий предоставления займов и размещает полученную статистику на официальном сайте.</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fghgf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hfg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">f</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hgf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gfh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hfg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hfg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hfg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fgh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gfh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hfg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gfh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fgh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hfg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fgh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gfh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fgh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">f</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gfh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fghf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hfg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fgh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">f</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gh</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">gfh</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fg</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">hf</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">h</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fh</p></body></html>"))
+        self.textBrowser.setHtml(_translate("Form", '''<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.6.7.2 (Linux)"/>
+	<meta name="author" content="Широков Максим Сергеевич"/>
+	<meta name="created" content="2024-02-19T08:15:00"/>
+	<meta name="changedby" content="Maxim Shirokov"/>
+	<meta name="changed" content="2024-06-03T12:20:00"/>
+	<meta name="AppVersion" content="16.0000"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin-left: 1.18in; margin-right: 0.59in; margin-top: 0.79in; margin-bottom: 0.79in }
+		p { line-height: 115%; text-align: left; orphans: 2; widows: 2; margin-bottom: 0.1in; direction: ltr; background: transparent }
+	</style>
+</head>
+<body lang="ru-RU" link="#000080" vlink="#800000" dir="ltr"><p style="line-height: 108%; margin-bottom: 0.11in">
+<b>Что такое кредит?</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Кредит –
+это единовременное предоставление
+финансовых средств одной стороной в
+пользу другой, обязующейся вернуть их
+на установленных и принятых обеими
+сторонами условиях.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Виды
+кредитов</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">В целом
+существуют следующие виды кредитов:</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">- Потребительский</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">- Ипотечный</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">- Автокредит</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">- Кредитные
+карты</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">- Рассрочка</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">- Микрозайм</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">По цели
+кредиты могут быть целевыми и нецелевыми.
+Целевые кредиты выдаются для конкретной
+покупки (автомобиль, недвижимость,
+техника и др.), а средства нецелевого
+кредита могут быть использованы по
+усмотрению получателя. Почти всегда
+целевые кредиты более выгодны, так как
+банк знает куда его клиент потратит
+деньги и поэтому предоставляет условия
+кредитования лучше, чем при нецелевом
+кредите.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">По обеспечению
+кредиты делятся на обеспеченные (с
+залогом или поручителями) и необеспеченные.
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Залоговые
+кредиты выдаются под залог ликвидного
+имущества, например, недвижимость или
+автомобиль. Оценочная стоимость имущества
+должна быть соразмерна с суммой кредита,
+имущество не должно быть под арестом
+или другими ограничениями, иметь
+обременения или притязания третьих
+лиц, заемщик должен быть собственником
+объекта залога. Залог позволяет взять
+кредит по лучшей процентной ставке, на
+больший срок и на более крупную сумму,
+чем обычные потребительские кредиты.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Если у банка
+возникнут сомнения в надежности заемщика,
+он может потребовать предъявить
+поручителя для выдачи кредита. Поручитель
+выступает в роли «страховки», на случай
+если заемщик не сможет платить по своим
+обязательствам, в таком случае поручитель
+будет обязан выплатить остаток кредита.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Типы
+платежей по кредиту</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Аннуитетный
+платеж – платеж, который не меняется в
+течение срока выплаты кредита. Данный
+платеж состоит из части, уплачиваемой
+в счет основного долга, и процентной
+части. В первых выплатах проценты
+составляют большую часть платежа, но к
+концу срока кредитования процентная
+часть уменьшается.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Дифференцированный
+платеж – платеж, уменьшающийся в течение
+срока выплаты кредита. Такой платеж
+также состоит из процентной части и
+части основного долга, но сумма погашения
+основного долга при таком типе платежа
+фиксирована, изменяется только сумма
+уплачиваемых процентов. Кредит с такими
+платежами выгоднее, но из-за больших
+начальных платежей может не подходить
+гражданам с невысоким достатком.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Регулирование
+кредитования законами РФ.</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Федеральный
+закон №353-ФЗ «О потребительском кредите»
+от 21.12.2013 разделяет условия кредитования
+на общие для всех клиентов банка и
+специальные, отличающиеся индивидуальностью
+для каждого получателя кредитных
+средств. Кроме того, закон не оставляет
+за банком права требовать вознаграждения
+за исполнение обязанностей, предусмотренных
+законодательством (открытие счета и
+др.). Также данный закон позволяет банкам
+отказывать в выдаче кредита без объяснения
+причин.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Согласно
+статье 16 закона <span lang="en-US">N</span> 2300-<span lang="en-US">I</span>
+«О защите прав потребителей» от
+07.02.1992, законом запрещено обуславливать
+приобретение одних услуг другими,
+поэтому если банк навязывает вам
+страховку или иные услуги как необходимость
+для выдачи кредита, то вы смело можете
+указывать на данный закон. Однако банк
+вправе требовать страхования имущества,
+под залог которого вы берете кредит.
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Как
+получить кредит?</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Для получения
+кредита необходимо выполнить следующие
+действия:</p>
+<ol>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Выбрать
+	нужный вам банк, ознакомиться с
+	процентными ставками, которые он
+	предоставляет и рассчитать предварительную
+	стоимость кредита в кредитном
+	калькуляторе.</p></li>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Подать
+	заявку на кредит.</p></li>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Банк
+	проводит оценку кредитоспособности
+	на основе кредитного рейтинга, здесь
+	возможно будет необходимо предоставить
+	сведения о стаже работы, доходе, сведения
+	о поручителях и объекте залога.</p></li>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Банк
+	выносит решение о выдаче/невыдаче
+	кредита, предоставляет заявителю
+	индивидуальные условия кредитования.</p></li>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Прийти
+	в отделение банка для утверждения
+	условий кредитования (при необходимости
+	можно согласовать изменения некоторых
+	условий) и подписания документов.</p></li>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Получить
+	деньги на счет.</p></li>
+</ol>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Кредитный
+рейтинг</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Для оценки
+надежности заемщиков банки используют
+кредитный рейтинг. Кредитный рейтинг
+основывается на всех выданных кредитах,
+он понижается при наличии просроченных
+платежей, отказов в займах, долговых
+взысканий. Вся информация о кредитных
+действиях человека содержится в бюро
+кредитных историй (БКИ).
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">В кредитном
+рейтинге учитывается и постоянство
+использования кредитных продуктов,
+поэтому для поддержания хорошей кредитной
+истории важно постоянно использовать
+продукты кредитования, например,
+кредитную карту или рассрочку, не
+допуская просрочек по платежам.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Кредитные
+каникулы.</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Если вы
+оказались в трудном финансовом положении
+в течение срока выплаты кредита, вы
+можете подать заявление в банк на
+предоставление кредитных каникул.
+Кредитные каникулы дают возможность
+приостановить плату по кредитным
+обязательствам на срок до 6 месяцев,
+использовать такую возможность можно
+1 раз за время погашения кредита, если
+договором не предусмотрена возможность
+дополнительной отсрочки.
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Для одобрения
+кредитных каникул вам необходимо будет
+предоставить банку доказательства о
+снижении дохода или о попадании в зону
+чрезвычайной ситуации. Если вы предоставите
+все доказательства банк не будет иметь
+права отказать вам. Необходимо помнить,
+что во время кредитных каникул вы
+освобождаетесь от платежей, но проценты
+за этот период все равно начислят.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Реструктуризация.</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Реструктуризация
+– изменение условий существующего
+кредита, с целью снижения долговой
+нагрузки плательщика. Подать заявление
+на реструктуризацию можно при ухудшении
+вашего финансового положения, при
+условии, что вы докажете снижение доходов
+или факт попадания под воздействие
+чрезвычайных ситуаций. Как правило
+реструктуризация используется при
+наличии задолженностей, просрочек, пени
+или штрафов. Реструктуризация портит
+кредитный рейтинг, поэтому если возможно,
+от неё стоит отказаться.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Если же у
+вас нет возможности продолжить платить
+по вашим обязательствам, реструктуризация
+может обеспечить вам:</p>
+<ul>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Снижение
+	процентной ставки</p></li>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Снижение
+	ежемесячного платежа и увеличение
+	срока кредитования</p></li>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Сочетание
+	вышеупомянутых вариантов</p></li>
+</ul>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Рефинансирование.</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Рефинансирование
+– способ оплаты одного кредита, оформляя
+другой на более выгодных условиях. Как
+правило банк не выдает средства для
+рефинансирования на руки клиенту, а
+самостоятельно перенаправляет в нужный
+банк. Таким способом нельзя погасить
+задолженности МФО и реструктурированные
+кредиты.
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Рефинансирование
+не одобрят, если по текущему кредиту
+есть просрочки платежей, задолженности,
+а также если с момента выдачи кредита
+не прошло время, достаточное для оценки
+платежеспособности клиента.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Рефинансировать
+кредиты можно неограниченное количество
+раз.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Банкротство.</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in">В самой
+серьезной ситуации невозможности
+платить по долговым обязательствам
+применяется процедура банкротства.
+Такую процедуру можно осуществить
+только при отсутствии дохода и имущества,
+которое можно продать для оплаты долга.
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in">Существует
+2 варианта признания физического лица
+банкротом:</p>
+<ul>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Внесудебный
+	– при долге от 50 тыс. до 500 тыс. рублей.
+	Такая процедура бесплатна, осуществляется
+	через МФЦ.</p></li>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in">Судебное
+	– при долге свыше 500 тыс. рублей. Процедура
+	осуществляется через Арбитражный суд,
+	придется оплатить судебные издержки
+	и госпошлину.</p></li>
+</ul>
+<p style="line-height: 108%; margin-bottom: 0.11in">После
+признания физического лица банкротом,
+с него спишут все долги, однако кредитная
+история человека сильно ухудшится, в
+течение 3 лет он не сможет участвовать
+в управлении юридическим лицом, повторно
+пройти процедуру банкротства будет
+возможно только через 5 лет, в течение
+следующих 5 лет банкрот не сможет
+управлять финансовой организацией.
+Также на время судебных разбирательств
+лицу, претендующему на статус банкрота,
+могут запретить выезд за пределы страны.</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+</body>
+</html>'''))
         self.label.setText(_translate("Form", "Информация о кредитах"))
 
 
