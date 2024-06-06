@@ -65,6 +65,8 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                     self.enter_sum.setText('100000000')
             except ValueError:
                 QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть целое число")
+        else:
+            self.sum = 0
 
     def change_rate(self, text):
         if text:
@@ -75,6 +77,8 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                     self.rate_enter.setText('292')
             except ValueError:
                 QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
+        else:
+            self.rate = 0
 
     def change_term(self, text):
         if text:
@@ -88,6 +92,9 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                     self.enter_term.setText('30')
             except ValueError:
                 QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
+        else:
+            self.term = 0
+
 
     def change_date(self, text):
         self.date = text
