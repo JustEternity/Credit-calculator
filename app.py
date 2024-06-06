@@ -15,6 +15,7 @@ from PyQt6.QtCore import Qt
 
 
 
+
 class Calculator_app(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:
         super().__init__()
@@ -116,9 +117,9 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
             interest_payment = remaining_loan * (interest_rate / 12)
             principal_payment = monthly_payment - interest_payment
             remaining_loan -= principal_payment
-            payment_schedule[payment_date.strftime("%Y-%m-%d")] = [f'{round(monthly_payment, 2)}',
-                                                                   f'{round(interest_payment, 2)}',
-                                                                   f'{round(remaining_loan, 2)}']
+            payment_schedule[payment_date.strftime("%Y-%m-%d")] = [f'{abs(round(monthly_payment, 2))}',
+                                                                   f'{abs(round(interest_payment, 2))}',
+                                                                   f'{abs(round(remaining_loan, 2))}']
 
         self.income.setText(f'Необходимый уровень дохода для одобрения кредита:\n{monthly_payment*2:.0f}')
 
@@ -171,9 +172,9 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                 payment_date = payment_date.replace(day=min(issue_date.day, payment_date.day))
 
             # Store the payment details in the dictionary
-            payments[payment_date.strftime("%Y-%m-%d")] = [f'{round(total_payment, 2)}',
-                                                           f'{round(interest_payment, 2)}',
-                                                           f'{round(remaining_balance, 2)}']
+            payments[payment_date.strftime("%Y-%m-%d")] = [f'{abs(round(total_payment, 2))}',
+                                                           f'{abs(round(interest_payment, 2))}',
+                                                           f'{abs(round(remaining_balance, 2))}']
 
         self.income.setText(f'Необходимый уровень дохода для одобрения кредита:\n {float(next(iter(payments.values()))[0])*2:.0f}')
 

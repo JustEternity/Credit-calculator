@@ -7,7 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
+from PyQt6.QtGui import QIntValidator, QDoubleValidator
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -103,6 +103,7 @@ class Ui_MainWindow(object):
         self.enter_sum = QtWidgets.QLineEdit(parent=self.credit_sum)
         self.enter_sum.setMaximumSize(QtCore.QSize(150, 25))
         self.enter_sum.setMaxLength(10)
+        self.enter_sum.setValidator(QIntValidator(0, 100000000))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.enter_sum.setFont(font)
@@ -223,6 +224,7 @@ class Ui_MainWindow(object):
         self.rate_enter = QtWidgets.QLineEdit(parent=self.rate)
         self.rate_enter.setMaximumSize(QtCore.QSize(100, 25))
         self.rate_enter.setMaxLength(6)
+        self.rate_enter.setValidator(QDoubleValidator(0.0, 100000000.0, 2))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.rate_enter.setFont(font)
@@ -286,6 +288,7 @@ class Ui_MainWindow(object):
         self.enter_term = QtWidgets.QLineEdit(parent=self.term)
         self.enter_term.setMaximumSize(QtCore.QSize(16777215, 25))
         self.enter_term.setMaxLength(3)
+        self.enter_term.setValidator(QIntValidator(0, 360))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.enter_term.setFont(font)
@@ -471,7 +474,7 @@ class Ui_MainWindow(object):
         self.month_payment.setText(_translate("MainWindow", "Ежемесячный платеж:"))
         self.overpayment.setText(_translate("MainWindow", "Сумма переплаты:"))
         self.paygraph_button.setText(_translate("MainWindow", "График платежей"))
-        self.label_credit_type.setText(_translate("MainWindow", "Вид платежа:"))
+        self.label_credit_type.setText(_translate("MainWindow", "Тип платежа:"))
         self.radioButton_1.setText(_translate("MainWindow", "Аннуитетный"))
         self.radioButton_2.setText(_translate("MainWindow", "Дифференцированный"))
         self.income.setText(_translate('MainWindow', 'Необходимый уровень дохода для одобрения кредита:\n'))
