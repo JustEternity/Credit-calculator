@@ -57,34 +57,37 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
             QMessageBox.warning(self.layoutWidget, "Предупреждение", "Заполните поля выше")
 
     def change_sum(self, text):
-        try:
-            self.sum = int(text)
-            if self.sum > 100000000:
-                self.sum = 100000000
-                self.enter_sum.setText('100000000')
-        except ValueError:
-            QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть целое число")
+        if text:
+            try:
+                self.sum = int(text)
+                if self.sum > 100000000:
+                    self.sum = 100000000
+                    self.enter_sum.setText('100000000')
+            except ValueError:
+                QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть целое число")
 
     def change_rate(self, text):
-        try:
-            self.rate = float(text)
-            if self.rate > 292:
-                self.rate = 292
-                self.rate_enter.setText('292')
-        except ValueError:
-            QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
+        if text:
+            try:
+                self.rate = float(text.replace(',', '.'))
+                if self.rate > 292:
+                    self.rate = 292
+                    self.rate_enter.setText('292')
+            except ValueError:
+                QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
 
     def change_term(self, text):
-        try:
-            self.term = int(text)
-            if self.choice_term.currentText() == 'мес.' and self.term > 360:
-                self.term = 360
-                self.enter_term.setText('360')
-            if self.choice_term.currentText() == 'лет' and self.term > 30:
-                self.term = 30
-                self.enter_term.setText('30')
-        except ValueError:
-            QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
+        if text:
+            try:
+                self.term = int(text)
+                if self.choice_term.currentText() == 'мес.' and self.term > 360:
+                    self.term = 360
+                    self.enter_term.setText('360')
+                if self.choice_term.currentText() == 'лет' and self.term > 30:
+                    self.term = 30
+                    self.enter_term.setText('30')
+            except ValueError:
+                QMessageBox.warning(self.layoutWidget, "Предупреждение", "Здесь должно быть число")
 
     def change_date(self, text):
         self.date = text

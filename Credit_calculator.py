@@ -225,6 +225,7 @@ class Ui_MainWindow(object):
         self.rate_enter = QtWidgets.QLineEdit(parent=self.rate)
         self.rate_enter.setMaximumSize(QtCore.QSize(100, 25))
         self.rate_enter.setMaxLength(6)
+        self.rate_enter.setValidator(QDoubleValidator(0.0, 100000000.0, 2))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.rate_enter.setFont(font)
