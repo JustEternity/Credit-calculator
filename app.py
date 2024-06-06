@@ -199,8 +199,8 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                     self.calculate_paygraph(self.schedule_differ)
                 case -1:
                     QMessageBox.warning(self.layoutWidget, "Предупреждение", "Выберите тип платежа по кредиту")
-        else:
-            QMessageBox.warning(self.layoutWidget, "Предупреждение", "Заполните поля выше")
+        #else:
+            #QMessageBox.warning(self.layoutWidget, "Предупреждение", "Заполните поля выше")
 
     def calculate_paygraph(self, schedule):
         ''' Функция для вывода графика платежей по кредиту
@@ -252,6 +252,10 @@ class Graph_window(QMainWindow, Ui_Schedule):
             wb = openpyxl.Workbook()
             ws = wb.active
 
+            ws.column_dimensions['A'].width = 12
+            ws.column_dimensions['B'].width = 14
+            ws.column_dimensions['C'].width = 12
+            ws.column_dimensions['D'].width = 12
             # Вставить 1 строку перед экспортируемой таблицей
             ws.insert_rows(1, 1)
 
