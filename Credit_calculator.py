@@ -30,6 +30,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setStyleSheet("#centralwidget {\n"
                                         "background-color: #ebfabe;\n"
+                                        "color: black;\n"
                                         "}")
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox = QtWidgets.QGroupBox(parent=self.centralwidget)

@@ -39,7 +39,7 @@ class Ui_Info(object):
         self.textBrowser.setObjectName("textBrowser")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.label = QtWidgets.QLabel(parent=Form)
-        self.label.setGeometry(QtCore.QRect(120, 10, 261, 41))
+        self.label.setGeometry(QtCore.QRect(22, 10, 421, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.label.setFont(font)
@@ -340,7 +340,7 @@ class Ui_Info(object):
 </p>
 </body>
 </html>'''))
-        self.label.setText(_translate("Form", "Информация о кредитах"))
+        self.label.setText(_translate("Form", "Справочная информация о кредитовании"))
 
 
 

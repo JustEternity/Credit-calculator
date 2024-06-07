@@ -152,7 +152,7 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.part_of_debt = self.sum / (self.term*self.type_term)
 
 
-        self.amount_payments.setText(f"Сумма платежа\nбез учета процентов: {self.part_of_debt:.2f}")
+        self.amount_payments.setText(f"Ежемесячный платеж\nбез учета процентов: {self.part_of_debt:.2f}")
 
         self.schedule_differ = self.schedule_diff(self.sum, self.rate, self.term*self.type_term, self.date)
         self.sum_of_percents = self.percents_sum(self.schedule_differ)
