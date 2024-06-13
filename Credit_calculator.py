@@ -184,7 +184,7 @@ class Ui_MainWindow(object):
         self.dateEdit.setProperty("showGroupSeparator", False)
         self.dateEdit.setCalendarPopup(True)
         self.dateEdit.setObjectName("dateEdit")
-        self.dateEdit.setMinimumDate(QDate(1991, 1, 1))
+        self.dateEdit.setMinimumDate(QDate(0000, 1, 1))
         self.dateEdit.setMaximumDate(QDate(9000, 12, 31))
 
         self.verticalLayout_2.addWidget(self.dateEdit)
