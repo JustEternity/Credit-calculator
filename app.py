@@ -11,6 +11,7 @@ from dateutil.relativedelta import relativedelta
 from PyQt6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox, QTableWidgetItem, QFileDialog
 from payment_schedule import Ui_Schedule
 from PyQt6.QtCore import Qt
+from decimal import Decimal, getcontext, ROUND_DOWN
 
 
 
@@ -106,18 +107,19 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.month_rate = self.rate / 1200
         self.month_payment_annuty = self.sum*((self.month_rate * (1 + self.month_rate)**(self.term*self.type_term)) /
                                               ((1 + self.month_rate)**(self.term*self.type_term)  - 1))
-        self.all_payments_annuty = self.month_payment_annuty * self.type_term * self.term
-        self.annuty_overpayment = self.all_payments_annuty - self.sum
-
-        self.amount_payments.setText(f'Сумма выплат: {self.all_payments_annuty:.2f}')
         self.month_payment.setText(f"Ежемесячный платеж: {self.month_payment_annuty:.2f}")
-        self.overpayment.setText(f"Сумма переплаты: {self.annuty_overpayment:.2f}")
         self.schedule_ann = self.calculate_annuity_payments(self.sum, self.month_payment_annuty, self.rate/100,
                                               self.term*self.type_term, self.date.toString('yyyy-MM-dd'))
+        self.percents_annuity = self.percents_sum(self.schedule_ann)
+        self.overpayment.setText(f'Сумма переплаты: {self.percents_annuity:.2f}')
+        self.amount_payments.setText(f'Сумма выплат: {self.percents_annuity + self.sum:.2f}')
 
     def calculate_annuity_payments(self, loan_amount, monthly_payment, interest_rate, loan_term, issue_date):
+        getcontext().prec = 28
         payment_schedule = {}
-        remaining_loan = loan_amount
+        remaining_loan = Decimal(loan_amount)
+        monthly_payment = Decimal(monthly_payment)
+        interest_rate = Decimal(interest_rate)
         issue_date = datetime.strptime(issue_date, "%Y-%m-%d")
 
         for month in range(1, loan_term + 1):
@@ -127,9 +129,13 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
             interest_payment = remaining_loan * (interest_rate / 12)
             principal_payment = monthly_payment - interest_payment
             remaining_loan -= principal_payment
-            payment_schedule[payment_date.strftime("%Y-%m-%d")] = [f'{abs(round(monthly_payment, 2))}',
-                                                                   f'{abs(round(interest_payment, 2))}',
-                                                                   f'{abs(round(remaining_loan, 2))}']
+            if remaining_loan < Decimal("0.0000000001"):
+                remaining_loan = Decimal("0.00")
+            payment_schedule[payment_date.strftime("%Y-%m-%d")] = [f'{(monthly_payment.quantize(Decimal("0.00"), rounding=ROUND_DOWN))}',
+                                                               f'{(interest_payment.quantize(Decimal("0.00"), rounding=ROUND_DOWN))}',
+                                                               f'{(remaining_loan.quantize(Decimal("0.00"), rounding=ROUND_DOWN))}']
+            if payment_schedule[payment_date.strftime("%Y-%m-%d")][-1] == '0.00':
+                break
 
         self.income.setText(f'Необходимый уровень дохода для одобрения кредита:\n{monthly_payment*2:.0f}')
 
@@ -157,7 +163,7 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         self.schedule_differ = self.schedule_diff(self.sum, self.rate, self.term*self.type_term, self.date)
         self.sum_of_percents = self.percents_sum(self.schedule_differ)
         self.month_payment.setText(f"Переплата: {self.sum_of_percents:.2f}")
-        self.overpayment.setText(f"")
+        self.overpayment.setText(f"Сумма выплат: {self.sum_of_percents + self.sum:.2f}")
 
     def percents_sum(self, schedule):
         return sum(float(value[1]) for value in schedule.values())
@@ -199,8 +205,8 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                     self.calculate_paygraph(self.schedule_differ)
                 case -1:
                     QMessageBox.warning(self.layoutWidget, "Предупреждение", "Выберите тип платежа по кредиту")
-        #else:
-            #QMessageBox.warning(self.layoutWidget, "Предупреждение", "Заполните поля выше")
+        else:
+            QMessageBox.warning(self.layoutWidget, "Предупреждение", "Заполните поля выше")
 
     def calculate_paygraph(self, schedule):
         ''' Функция для вывода графика платежей по кредиту
@@ -232,7 +238,8 @@ class Graph_window(QMainWindow, Ui_Schedule):
 
     def display_schedule(self, data_dict):
         try:
-            self.tableWidget.setRowCount(len(data_dict))
+            row = 0
+            self.tableWidget.setRowCount(len(data_dict))  # Установка количества строк после цикла
             row = 0
             for key, values in data_dict.items():
                 date = QTableWidgetItem(key)
@@ -245,6 +252,7 @@ class Graph_window(QMainWindow, Ui_Schedule):
                 row += 1
         except ValueError:
             QMessageBox.warning(self.layout, 'Warning', 'Enter data to procceding')
+
 
     def save_xls(self):
         file_name, _ = QFileDialog.getSaveFileName(self, "Save File", "", "Excel Files (*.xlsx)")
