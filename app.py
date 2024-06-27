@@ -96,7 +96,6 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
         else:
             self.term = 0
 
-
     def change_date(self, text):
         self.date = text
 
@@ -203,10 +202,7 @@ class Calculator_app(QMainWindow, Ui_MainWindow):
                     self.calculate_paygraph(self.schedule_ann)
                 case 2:
                     self.calculate_paygraph(self.schedule_differ)
-                case -1:
-                    QMessageBox.warning(self.layoutWidget, "Предупреждение", "Выберите тип платежа по кредиту")
-        else:
-            QMessageBox.warning(self.layoutWidget, "Предупреждение", "Заполните поля выше")
+
 
     def calculate_paygraph(self, schedule):
         ''' Функция для вывода графика платежей по кредиту
